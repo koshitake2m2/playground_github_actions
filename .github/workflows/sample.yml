@@ -1,5 +1,5 @@
 name: GitHub Actions sample
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} is the author!
 on: [push]
 jobs:
   sample-job001:

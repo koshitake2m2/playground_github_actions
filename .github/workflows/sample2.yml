@@ -1,0 +1,9 @@
+name: GitHub Actions sample2
+run-name: sample2
+on: [push]
+jobs:
+  sample2-job001:
+    runs-on: ubuntu-latest
+    steps:
+      - name: wow step
+        run: echo "wow"
