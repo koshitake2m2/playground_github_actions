@@ -13,4 +13,17 @@ jobs:
       - name: hello
         run: |
           pwd
+          ls
           cat tmp.txt
+      - name: create tmp
+        id: create-tmp
+        run: |
+          tmp_file=$(mktemp)
+          echo "I am a tmp file." > $tmp_file
+          cat $tmp_file
+          echo "tmp_file=$tmp_file" >> "$GITHUB_OUTPUT"
+      - name: read tmp
+        id: read-tmp
+        run: |
+          tmp_file=${{ steps.create-tmp.outputs.tmp_file }}
+          cat $tmp_file
