@@ -1,0 +1,16 @@
+name: tmp-file
+run-name: tmp-file
+on: workflow_dispatch
+jobs:
+  job001:
+    runs-on: ubuntu-latest
+    steps:
+      - name: wow step
+        run: |
+          echo "hello world" > tmp.txt
+          pwd
+          cat tmp.txt
+      - name: hello
+        run: |
+          pwd
+          cat tmp.txt
