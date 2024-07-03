@@ -5,16 +5,18 @@ jobs:
   job001:
     runs-on: ubuntu-latest
     steps:
-      - name: wow step
+      - name: create file
         run: |
           echo "hello world" > tmp.txt
           pwd
           cat tmp.txt
-      - name: hello
+      - name: read file
         run: |
           pwd
           ls
           cat tmp.txt
+
+      # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-output-parameter
       - name: create tmp
         id: create-tmp
         run: |
