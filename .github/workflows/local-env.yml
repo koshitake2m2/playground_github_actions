@@ -8,6 +8,6 @@ jobs:
         run: |
           hello="hello world"
           echo $hello
-      - name: read env
+      - name: read env in other step, and it will not work
         run: |
-          echo $hello
+          echo $hello # no output
