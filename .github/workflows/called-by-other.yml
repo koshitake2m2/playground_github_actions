@@ -1,0 +1,36 @@
+name: called by other
+run-name: called-by-other
+on:
+  workflow_call:
+    inputs:
+      animal:
+        description: "animal to greet"
+        type: string
+        required: true
+      fruit:
+        description: "fruit to greet"
+        type: string
+        required: false
+        default: "apple"
+    outputs:
+      message:
+        description: "message to output"
+        value: ${{ jobs.job001.outputs.message }}
+
+jobs:
+  job001:
+    runs-on: ubuntu-latest
+    outputs:
+      message: ${{ steps.set-message.outputs.message }}
+    steps:
+      - name: Greet animal
+        run: |
+          echo "Hello ${{ inputs.animal }}!"
+      - name: Greet fruit
+        run: |
+          echo "Hello ${{ inputs.fruit }}!"
+      - name: Set message
+        id: set-message
+        run: |
+          message="Hello, I am called by other workflow!"
+          echo "message=$message" >> "$GITHUB_OUTPUT"

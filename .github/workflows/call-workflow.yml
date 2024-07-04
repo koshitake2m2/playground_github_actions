@@ -1,0 +1,20 @@
+name: call workflow
+run-name: call-workflow
+on: workflow_dispatch
+jobs:
+  job001:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo hello
+        run: |
+          echo "hello world"
+
+      - name: call workflow
+        id: call-workflow
+        uses: ./.github/workflows/called-by-other.yml
+        with:
+          animal: "cat"
+
+      - name: output result
+        run: |
+          echo "result: ${{ steps.call-workflow.outputs.message }}"

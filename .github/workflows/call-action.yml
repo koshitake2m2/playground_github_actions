@@ -1,0 +1,20 @@
+name: call action
+run-name: call-action
+on: workflow_dispatch
+jobs:
+  job001:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo hello
+        run: |
+          echo "hello world"
+
+      - name: call sample greet action
+        id: greet-action
+        uses: ./.github/actions/sample-greet
+        with:
+          animal: "cat"
+
+      - name: output action result
+        run: |
+          echo "greet action result: ${{ steps.greet-action.outputs.message }}"

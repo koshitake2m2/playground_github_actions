@@ -1,0 +1,32 @@
+name: sample greet action
+description: "A sample action"
+
+inputs:
+  animal:
+    description: "The animal to greet"
+    required: true
+  fruit:
+    description: "The fruit to greet"
+    required: false
+    default: "apple"
+
+outputs:
+  message:
+    description: "The greeting"
+    value: ${{ steps.greet-message.outputs.message }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Greet animal
+      shell: bash
+      run: echo "Hello ${{ inputs.animal }}!"
+    - name: Greet fruit
+      shell: bash
+      run: echo "Hello ${{ inputs.fruit }}!"
+    - name: Set message
+      id: greet-message
+      shell: bash
+      run: |
+        message="Hello, I am Sample Greet Action!"
+        echo "message=$message" >> "$GITHUB_OUTPUT"
