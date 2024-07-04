@@ -1,0 +1,22 @@
+name: manual input
+run-name: manual-input
+on:
+  workflow_dispatch:
+    inputs:
+      animal:
+        description: "The animal to greet"
+        required: true
+      fruit:
+        description: "The fruit to greet"
+        required: false
+        default: "apple"
+jobs:
+  job001:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Greet animal
+        shell: bash
+        run: echo "Hello ${{ inputs.animal }}!"
+      - name: Greet fruit
+        shell: bash
+        run: echo "Hello ${{ inputs.fruit }}!"
