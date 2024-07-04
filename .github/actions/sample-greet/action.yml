@@ -18,6 +18,8 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: check out code
+      uses: actions/checkout@v4
     - name: Greet animal
       shell: bash
       run: echo "Hello ${{ inputs.animal }}!"
