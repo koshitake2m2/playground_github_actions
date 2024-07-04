@@ -2,8 +2,10 @@ name: call workflow
 run-name: call-workflow
 on: workflow_dispatch
 jobs:
-  job001:
+  echo-hello:
     runs-on: ubuntu-latest
+    outputs:
+      message: "hello"
     steps:
       - name: check out code
         uses: actions/checkout@v4
@@ -12,12 +14,18 @@ jobs:
         run: |
           echo "hello world"
 
-      - name: call workflow
-        id: call-workflow
-        uses: ./.github/workflows/called-by-other.yml
-        with:
-          animal: "cat"
+  call-workflow:
+    needs: [echo-hello]
+    uses: ./.github/workflows/called-by-other.yml
+    with:
+      animal: "cat"
 
+  output-result:
+    needs: [call-workflow]
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out code
+        uses: actions/checkout@v4
       - name: output result
         run: |
-          echo "result: ${{ steps.call-workflow.outputs.message }}"
+          # echo "result: ${{ needs.call-workflow.outputs.message }}"

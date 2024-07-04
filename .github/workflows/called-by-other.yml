@@ -23,8 +23,6 @@ jobs:
     outputs:
       message: ${{ steps.set-message.outputs.message }}
     steps:
-      - name: check out code
-        uses: actions/checkout@v4
       - name: Greet animal
         run: |
           echo "Hello ${{ inputs.animal }}!"
