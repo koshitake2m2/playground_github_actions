@@ -5,6 +5,9 @@ jobs:
   job001:
     runs-on: ubuntu-latest
     steps:
+      - name: check out code
+        uses: actions/checkout@v4
+
       - name: echo hello
         run: |
           echo "hello world"
